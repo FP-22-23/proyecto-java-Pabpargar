@@ -12,6 +12,7 @@ Autor/a: Pablo Partal García   uvus:pabpargar
   * **fp.common**:	Paquete que contiene  
 * **/data**: Contiene el dataset del proyecto.
     * **melb_data.csv**: Archivo csv que contiene datos de diferentes casas de melburne.
+   
 ## Estructura del *dataset*
 
 El dataset original constaba de 21 columnas y mas de 13000 lineas. El dataset finalmene consta de 18 columnas y de 3215 lineas de las cuales las dos ultimas han sido generadas aleatoriamente.
@@ -74,7 +75,8 @@ Representa una casa en concreto.
 
 c
 **Criterio de igualdad**: Dos casas son iguales si su direccion y su terreno son iguales.
-.
+.
+
 
 **Criterio de ordenación**: Por direccion y la logitud de su terreno.
 

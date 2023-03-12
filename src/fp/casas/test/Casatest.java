@@ -30,7 +30,9 @@ public class Casatest {
 		
 		Casa c4 = new Casa ("Abbotsford", "",2,Type.h,1480000.0,"S","Biggin",LocalDate.of(2016, 12, 03),2.5,3067.0,2.0,1.0,1.0,202.0, new Coordenadas(-377.996,1449.984),
 				true,"jacuzzi/terrace/cinema" );
-		System.out.println(c4); 
+		System.out.println(c4);
+		
+		
 
 
 	}

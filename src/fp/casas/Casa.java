@@ -235,6 +235,8 @@ public class Casa implements Comparable <Casa>{
 		this.coordenadas = coordenadas;
 		this.pool = null;
 		this.otherspace = null;
+		
+		
 	}
 
 	@Override
