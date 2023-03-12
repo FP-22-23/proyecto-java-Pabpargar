@@ -15,7 +15,7 @@ Autor/a: Pablo Partal García   uvus:pabpargar
    
 ## Estructura del *dataset*
 
-El dataset original constaba de 21 columnas y mas de 13000 lineas. El dataset finalmene consta de 18 columnas y de 3215 lineas de las cuales las dos ultimas han sido generadas aleatoriamente.
+El dataset original constaba de 21 columnas y mas de 13000 lineas. El dataset finalmene consta de 18 columnas y de 3215 lineas de las cuales las dos ultimas han sido generadas aleatoriamente..
 
 * **suburb**: de tipo String,  indica el suburbi donde se encuentra la casa.
 * **address**: de tipo String, indica la direccion de la casa.

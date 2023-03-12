@@ -236,7 +236,6 @@ public class Casa implements Comparable <Casa>{
 		this.pool = null;
 		this.otherspace = null;
 		
-		
 	}
 
 	@Override
