@@ -83,4 +83,29 @@ c
 .
 ## Tipos auxiliares
 - Coordenadas. Esta compuesto por latitud y longitud. 
+
+### Factoría - FactoriaCasas
+Clase de factoría para construir objetos de tipo Casas.
+- _Partidas leerCasas(String Fichero)_:Crea un objeto de tipo Casas partir de la información recogida en el archivo csv, cuya ruta se da como parámetro.
+
+### Tipo Contenedor - Casas
+Clase contenedora de los objetos de tipo Casa.
+**Propiedades**:
+-  _casas_, de tipo _Set\<casa\>_, consultable. Conjunto de casas.
+ 
+**Constructores**: 
+- C1: Constructor por defecto. Creal un objeto de tipo Casas sin ninguna partida almacenada.
+- C2: Constructor con un parámetro de tipo Collection\<Casa\>. Crea un objeto de tipo Casas con las casas incluidas en la colección dada como parámetro.
+
+**Otras operaciones**:
+- _getSellerg(String seller)_: devuelve true si el valor pasado por parametro existe en al menos un objeto del csv.
+-_getsumacoches(String suburb)_: realiza la suma de las plazas de garajes en un barrio.
+-_getcasascodigopostal(Double postcode)_:devuelve una lista filtrada por el codigo postal.
+-_getcasasportype()_: devuelve un diccionario con clave el tipo de casa y valor los objetos casas que le pertenecen.
+-_ getnumroomMethod()_: devuelve un diccionario de clave Method y valor la suma total de la habitaciones
+-_añadirCasa(Casa casa)_: añade una casa.
+-_getnumeroCasa()_:cuenta el numero de casas totales.
+-_eliminarcasa(Casa casa)_: elimina una casa.
+-_añadircasas(Collection<Casa> casa)_: añade una coleccion de casas.
+
     
