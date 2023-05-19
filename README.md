@@ -107,5 +107,15 @@ Clase contenedora de los objetos de tipo Casa.
 -_getnumeroCasa()_:cuenta el numero de casas totales.
 -_eliminarcasa(Casa casa)_: elimina una casa.
 -_añadircasas(Collection<Casa> casa)_: añade una coleccion de casas.
+-_getSellergStream(String seller)_: igual que getSellerg solo que realizo usando stream.
+-_getsumacochesStream(String suburb)_: igual que getsumacoches solo que realizo usando stream.
+-_getcasascodigopostalStream(Double postcode)_: igual que getcasascodigopostal solo que realizo usando stream.
+-_getMaximoPrecioStream(Type type)_:devuelve el maximo precio segun el tipo.
+-_getFiltrarMethodOrdenarFecha(String method)_: devuelve un conjunto de casas filtrado por el metodo pasado por parametro.
+-_getCasasPorTypeStream()_:devuelve diccionario de clave type y valor un conjunto de casas.
+-_getConjuntoDeSellerStream()_:devuelve un conjunto con todos los Sellerg.
+-_getMayorLandsizeSegunSiTienePiscina()_:devuelve diccionario de clave Pool y valor el valor maximo de landsize.
+-_getLasNCasasConMasRoomsPorSuburb(Integer n)_: devuelve diccionario de clave Suburb y de valor una lista ordenada con el mayor numero de habitaciones.
+-_getSellerMayorPrecio()_:devuelve el suburb con el mayor precio.
 
     

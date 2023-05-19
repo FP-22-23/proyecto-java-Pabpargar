@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import fp.common.Coordenadas;
@@ -26,6 +28,21 @@ public class FactoriaCasas {
 				Files.lines(Paths.get(Fichero))
 					.skip(1)
 					.map(FactoriaCasas::parseaCasa);
+				res = new Casas(sv);
+			} catch (IOException e) {
+				System.out.println("No se ha encontrado el fichero " + Fichero);
+				e.printStackTrace();
+			}
+			return res;
+		}
+		public static Casas leerCasass(String Fichero) {
+			Casas res = null;
+			try {
+				Set<Casa> sv = 
+					Files.lines(Paths.get(Fichero))
+					.skip(1)
+					.map(FactoriaCasas::parseaCasa)
+					.collect(Collectors.toSet());
 				res = new Casas(sv);
 			} catch (IOException e) {
 				System.out.println("No se ha encontrado el fichero " + Fichero);

@@ -3,11 +3,17 @@ package fp.casas;
 import java.util.ArrayList;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +26,9 @@ public class Casas {
 	public Casas() {
 		this.casas = new HashSet<Casa>();
 	}
-	
+	public Casas(Collection<Casa> casas) {
+		this.casas = new HashSet<Casa>(casas);
+	}
 	public Casas(Stream<Casa> casas) {
 		this.casas = casas.collect(Collectors.toSet());
 	}
@@ -112,8 +120,8 @@ public class Casas {
 	 * @param postcode
 	 * @return devuelve una lista filtrada por el codigo postal.
 	 */
-	public List<Casa> getcasascodigopostal(Double postcode){
-		ArrayList<Casa> res = new ArrayList<>();
+	public Set<Casa> getcasascodigopostal(Double postcode){
+		HashSet<Casa> res = new HashSet<>();
 		for (Casa p: casas) {
 			if (p.getPostcode().equals(postcode)) {
 				res.add(p);
@@ -127,14 +135,14 @@ public class Casas {
 	 * @return un diccionario con clave el tipo de casa y valor los objetos casas que le pertenecen.
 	 */
 	
-	public Map<Type, List<Casa>> getcasasportype(){
-		Map<Type, List<Casa>> res = new HashMap<Type, List<Casa>>();
+	public Map<Type, Set<Casa>> getcasasportype(){
+		Map<Type, Set<Casa>> res = new HashMap<Type, Set<Casa>>();
 		for (Casa p: casas) {
 			Type clave = p.getType();
 			if (res.containsKey(clave)) {
 				res.get(clave).add(p);
 			} else {
-				List<Casa> casas = new ArrayList<Casa>();
+				Set<Casa> casas = new HashSet<Casa>();
 				casas.add(p);
 				res.put(clave, casas);
 			}
@@ -158,11 +166,122 @@ public class Casas {
 			}
 			return res;
 		}
+	/**
+	 * 
+	 * @param seller
+	 * @return true si el valor pasado por parametro existe en al menos un objeto del csv.
+	 */
+	public Boolean getSellergStream(String seller){
+		return casas.stream()
+				.anyMatch(x-> x.getSellerG().equals(seller));
+	}
+	/**
+	 * 
+	 * @param suburb
+	 * @return la suma de las plazas de garajes en un barrio.
+	 */
+	public Double getsumacochesStream(String suburb) {
+	
+		return  casas.stream()
+				.filter(x-> x.getSuburb().equals(suburb))
+				.mapToDouble(x -> x.getCar())
+				.sum();
+				
+	}
+	/**
+	 * 
+	 * @param postcode
+	 * @return devuelve una lista filtrada por el codigo postal.
+	 */
+	public Set<Casa> getcasascodigopostalStream(Double postcode){
+		return casas.stream()
+				.filter(x -> x.getPostcode().equals(postcode))
+				.collect(Collectors.toSet());
+		
+	}
+	/**
+	 * 
+	 * @param type
+	 * @return devuelve el maximo precio segun el tipo.
+	 */
+	public Double getMaximoPrecioStream(Type type){
+		return casas.stream()
+				.filter(x -> x.getType().equals(type))
+				.mapToDouble(x -> x.getPrice())
+				.max()
+				.getAsDouble();
+	}
+	/**
+	 * 
+	 * @param method
+	 * @return devuelve un conjunto de casas filtrado por el metodo pasado por parametro.
+	 */
+	public Set<Casa> getFiltrarMethodOrdenarFecha(String method){
+		return casas.stream()
+				.filter(x -> x.getMethod().equals(method))
+				.sorted(Comparator.comparing(Casa::getDate))
+				.collect(Collectors.toSet());
+	}
+	/**
+	 * 
+	 * 
+	 * @return devuelve diccionario de clave type y valor un conjunto de casas.
+	 */
+	public Map<Type, Set<Casa>> getCasasPorTypeStream(){
+		return casas.stream()
+				.collect(Collectors.groupingBy(Casa::getType, Collectors.toSet()));
+	}
+	/**
+	 * 
+	 * 
+	 * @return devuelve un conjunto con todos los Sellerg.
+	 */
+	public Set<String> getConjuntoDeSellerStream(){
+		return casas.stream()
+				.collect(Collectors.mapping(Casa::getSellerG, Collectors.toSet()));
+	}
+	/**
+	 * 
+	 * 
+	 * @return devuelve diccionario de clave Pool y valor el valor maximo de landsize.
+	 */
+	public Map<Boolean, Double> getMayorLandsizeSegunSiTienePiscina(){
+		return casas.stream()
+				.collect(Collectors.toMap(Casa::getPool,Casa::getLandsize,Double::max));
+	}
+	/**
+	 * 
+	 * @param n
+	 * @return devuelve diccionario de clave Suburb y de valor una lista ordenada con el mayor numero de habitaciones.
+	 */
+	public Map<String, List<Integer>> getLasNCasasConMasRoomsPorSuburb(Integer n){
+		return casas.stream()
+				.collect(Collectors.groupingBy(Casa::getSuburb, TreeMap:: new,
+						Collectors.collectingAndThen(Collectors.toList(), z -> auxiliar(z, n))));
+	}
+	public static List<Integer> auxiliar(List<Casa> z, Integer n){
+		
+		return z.stream().sorted(Collections.reverseOrder(Comparator.comparing(Casa::getRooms)))
+				.limit(n)
+				.map(Casa::getRooms)
+				.collect(Collectors.toList());
+	}
+	/**
+	 * 
+	 * 
+	 * @return devuelve el suburb con el mayor precio.
+	 */
+	public  String getSellerMayorPrecio(){
+		return casas.stream()
+				.max(Comparator.comparing(Casa::getPrice))
+				.map(Casa:: getSellerG)
+				.orElse(null);
+	
+	}
 }
 
 	
-		
-
+	
 
 
 
